@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--扫描类包以使用注解的方式注入实体-->
+    <context:component-scan base-package="org.wcframework.entity"/>
+
+    <!--普通实体，使用setter方法生成对象，默认单例-->
+    <bean id="bean1" class="org.wcframework.entity.DemoEntity">
+        <property name="param1" value="ahahah"/>
+        <property name="param2" value="1123"/>
+        <property name="param3" value="true"/>
+    </bean>
+
+    <import resource="spring-context.xml"/>
+</beans>

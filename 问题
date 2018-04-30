@@ -1,0 +1,1 @@
+1、占位符处理   WCEnvironment.resolveRequiredPlaceholders(text);
