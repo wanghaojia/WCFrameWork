@@ -1,31 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             targetNamespace="http://www.wcframework.org/beans">
+
+    <<xsd:complexType name="identifiedType" abstract="true">
+    <xsd:annotation>
+        <xsd:documentation>带有id的对象</xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="id" type="xsd:string"/>
+</xsd:complexType>
+
     <xsd:element name="beans">
         <xsd:annotation>
-            <xsd:documentation>
-                wcframework框架根元素
-            </xsd:documentation>
+            <xsd:documentation>根标签</xsd:documentation>
         </xsd:annotation>
-
-        <xsd:complexType><!-- 定义复杂类型 -->
-            <xsd:choice minOccurs="0" maxOccurs="unbounded">
-                <xsd:element ref="bean"/>
-                <xsd:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
-            </xsd:choice>
+        <xsd:complexType> <!-- 定义复杂类型 -->
+            <xsd:sequence>
+                <xsd:element ref="bean" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
 
     <xsd:element name="bean">
         <xsd:annotation>
-            <xsd:documentation>
-                实例
-            </xsd:documentation>
+            <xsd:documentation>定义实体内容</xsd:documentation>
         </xsd:annotation>
         <xsd:complexType>
-            <xsd:attribute name="name" type="xsd:string"/>
-            <xsd:attribute name="value" type="xsd:string"/>
-            <xsd:attribute name="ref"
+            <xsd:complexContent>
+                <xsd:extension base="identifiedType">
+                    <xsd:group ref="beanGroup"/>
+                    <xsd:attributeGroup ref="beanAttributes"/>
+                </xsd:extension>
+            </xsd:complexContent>
         </xsd:complexType>
     </xsd:element>
+
+    <xsd:group name="beanGroup">
+        <xsd:sequence>
+
+        </xsd:sequence>
+    </xsd:group>
+
+    <xsd:attributeGroup name="beanAttributes">
+        <xsd:attribute name="class" use="required">
+            <xsd:annotation>
+                <xsd:documentation source="java:java.lang.Class">类路径</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:attributeGroup>
+
+    <xsd:element name="property">
+
+    </xsd:element>
+
 </xsd:schema>
